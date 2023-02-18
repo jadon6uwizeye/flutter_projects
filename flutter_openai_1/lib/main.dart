@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         });
       } else {
         setState(() {
-          _response = 'Error: ${response.statusCode}';
+          _response = 'Error: ${response.statusCode}: ${response.body}';
         });
       }
     } catch (e) {
