@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:medical_app/commons/doctors.dart';
+import 'package:medical_app/screens/schedule.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -370,7 +371,10 @@ class HomeScreen extends StatelessWidget {
               topLeft: Radius.circular(50),
               topRight: Radius.circular(20),
             )),
-            child: BottomNavigationBar(type: BottomNavigationBarType.fixed,
+            child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                onTap: (value) => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ScheduleScreen())),
                 // ignore: prefer_const_literals_to_create_immutables
                 items: [
                   const BottomNavigationBarItem(

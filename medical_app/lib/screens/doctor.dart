@@ -449,7 +449,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 8),
-                          Text("'\$52'",
+                          Text("\$52",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
