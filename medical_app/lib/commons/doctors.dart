@@ -1,6 +1,8 @@
 // a card component to be reused
 import 'package:flutter/material.dart';
 
+import '../screens/doctor.dart';
+
 class CardComponent extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -24,80 +26,90 @@ class CardComponent extends StatelessWidget {
     final width = MediaQuery.of(context).size.width -
         MediaQuery.of(context).padding.left -
         MediaQuery.of(context).padding.right;
-    return Card(
-      child: Container(
-        padding: const EdgeInsets.all(12.0),
-        width: width * 0.4,
-        height: height * 0.3,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: image,
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: Color.fromRGBO(210, 210, 219, 1),
-                    fontSize: 11,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            Container(
-              padding: const EdgeInsets.all(5),
-              width: width * 0.2,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Color.fromARGB(255, 249, 248, 245),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DoctorDetailsScreen(),
+          ),
+        );
+      },
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(12.0),
+          width: width * 0.4,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: const Color.fromARGB(255, 255, 255, 255),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: image,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  const Icon(
-                    Icons.star,
-                    color: Color.fromARGB(255, 226, 201, 8),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const SizedBox(
-                    width: 5,
+                  SizedBox(
+                    height: height * 0.01,
                   ),
                   Text(
-                    rating.toString(),
+                    subtitle,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 9, 9, 9),
+                      color: Color.fromRGBO(210, 210, 219, 1),
                       fontSize: 11,
                     ),
                   ),
                 ],
               ),
-            )
-          ],
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Container(
+                padding: const EdgeInsets.all(5),
+                width: width * 0.2,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Color.fromARGB(255, 249, 248, 245),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Color.fromARGB(255, 226, 201, 8),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      rating.toString(),
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 9, 9, 9),
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -155,6 +155,9 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              SizedBox(
+                height: height * 0.02,
+              ),
               // a row of small containers of emoji
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -163,16 +166,16 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(12.0),
-                      width: width * 0.2,
+                      width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
                       child: const Text(
-                        '🤒 temperature',
+                        '🤒  Temperature',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
@@ -180,16 +183,16 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(width: width * 0.02),
                     Container(
                       padding: const EdgeInsets.all(12.0),
-                      width: width * 0.2,
+                      width: width * 0.3,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
                       child: const Text(
-                        '🤧 snuffle',
+                        '🤧  Snuffle',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
@@ -197,7 +200,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(width: width * 0.02),
                     Container(
                       padding: const EdgeInsets.all(12.0),
-                      width: width * 0.2,
+                      width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -206,7 +209,7 @@ class HomeScreen extends StatelessWidget {
                       child: const Text(
                         '🤕 headeache',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
@@ -214,16 +217,16 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(width: width * 0.02),
                     Container(
                       padding: const EdgeInsets.all(12.0),
-                      width: width * 0.2,
+                      width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
                       child: const Text(
-                        '🤒 temperature',
+                        '🤒  Temperature',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
@@ -231,16 +234,16 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(width: width * 0.02),
                     Container(
                       padding: const EdgeInsets.all(12.0),
-                      width: width * 0.2,
+                      width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
                       child: const Text(
-                        '🤮 Vomiting',
+                        '🤮  Vomiting',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
