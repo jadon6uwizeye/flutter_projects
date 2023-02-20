@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:medical_app/screens/schedule.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   @override
@@ -15,99 +16,107 @@ class DoctorDetailsScreen extends StatelessWidget {
         MediaQuery.of(context).padding.right;
     return Scaffold(
       body: Container(
+        padding: EdgeInsets.only(top: height * 0.03),
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 82, 34, 172),
+          color: Color.fromARGB(255, 63, 22, 186),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
+            Padding(
+              padding: const EdgeInsets.only(right: 16, bottom: 24, top: 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ),
+                    child: const Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
                     ),
-                    SizedBox(
-                      width: width / 4,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/avatar.png'),
-                            radius: 32,
-                          ),
+                  ),
+                  SizedBox(
+                    width: width / 6,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 28.0),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/avatar.png'),
+                          radius: 32,
                         ),
-                        SizedBox(
-                          height: height * 0.02,
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Text(
+                        'Dr. Viola Dunn',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text(
-                          'Dr. John Doe',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Text(
+                        'Therapist',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 202, 200, 205),
+                          fontSize: 16,
                         ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                        Text(
-                          'Cardiologist',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 30),
-                              height: height * 0.06,
-                              width: width * 0.1,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Color.fromARGB(255, 164, 152, 176)),
-                              child: Icon(
-                                Icons.call,
-                                color: Colors.white,
-                              ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 30),
+                            height: height * 0.06,
+                            width: width * 0.1,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromARGB(255, 164, 152, 176)),
+                            child: Icon(
+                              Icons.call,
+                              color: Colors.white,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(right: 10),
-                              height: height * 0.06,
-                              width: width * 0.1,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Color.fromARGB(255, 164, 152, 176)),
-                              child: Icon(
-                                Icons.call,
-                                color: Colors.white,
-                              ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: height * 0.06,
+                            width: width * 0.1,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromARGB(255, 164, 152, 176)),
+                            child: Icon(
+                              Icons.call,
+                              color: Colors.white,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 245, 245, 249),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(32),
                     topRight: Radius.circular(32),
@@ -126,11 +135,14 @@ class DoctorDetailsScreen extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
+                      const SizedBox(height: 6),
                       const Text(
-                        'Dr. John Doe is a highly experienced cardiologist with over 10 years of practice. He specializes in treating heart diseases and has a vast experience of conducting successful surgeries.',
+                        'Dr. Viola Dunn is a highly experienced Therapist with over 10 years of practice in the industry. ',
                         style: TextStyle(
-                          fontSize: 14,
-                        ),
+                            fontSize: 16,
+                            fontFamily: 'sans serrif',
+                            // fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 18),
                       Row(
@@ -168,7 +180,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
-                              width: width * 0.6,
+                              width: width * 0.7,
                               padding: EdgeInsets.all(16),
                               margin: EdgeInsets.only(right: 16),
                               decoration: BoxDecoration(
@@ -216,14 +228,14 @@ class DoctorDetailsScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 14),
                                   Text(
-                                    "Having no clue what specialist you need to consult with? No problem! Just point out your symptoms.",
-                                    style: TextStyle(fontSize: 14),
+                                    "Thanks to Dr. Viola Dunn! she is proffesional,competent doctor, ...",
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              width: width * 0.6,
+                              width: width * 0.7,
                               padding: EdgeInsets.all(16),
                               margin: EdgeInsets.only(right: 16),
                               decoration: BoxDecoration(
@@ -271,8 +283,8 @@ class DoctorDetailsScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 14),
                                   Text(
-                                    "Having no clue what specialist you need to consult with? No problem! Just point out your symptoms.",
-                                    style: TextStyle(fontSize: 14),
+                                    "Thanks to Dr. Viola Dunn! she is proffesional,competent doctor, ...",
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
@@ -419,15 +431,15 @@ class DoctorDetailsScreen extends StatelessWidget {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
+                            children: const [
+                              Text(
                                 'Lotus Medical Center',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 '123 Main Street, Suite 200 New York, NY 10001',
                                 style:
@@ -437,16 +449,16 @@ class DoctorDetailsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 18),
+                      SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: const [
                           Text(
                             'Consultation Price',
                             style: TextStyle(
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                                // fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 135, 134, 134)),
                           ),
                           SizedBox(height: 8),
                           Text("\$52",
@@ -457,18 +469,31 @@ class DoctorDetailsScreen extends StatelessWidget {
                         ],
                       ),
                       // book appointment button
-                      SizedBox(height: 10),
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        height: height * 0.07,
-                        width: width * 1,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromARGB(255, 94, 21, 167)),
-                        child: Center(
-                          child: Text(
-                            "Book Appointment",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScheduleScreen()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          height: height * 0.07,
+                          width: width * 1,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Color.fromARGB(255, 63, 22, 186)),
+                          child: Center(
+                            child: Text(
+                              "Book Appointment",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
                           ),
                         ),
                       )

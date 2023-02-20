@@ -23,10 +23,11 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       // ignore: sort_child_properties_last
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 244, 244, 248),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
-            color: Color.fromARGB(255, 250, 250, 248),
+            color: Color.fromARGB(255, 244, 244, 248),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(
@@ -65,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                       height: height * 0.2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromARGB(255, 70, 93, 224),
+                        color: Color.fromARGB(255, 63, 22, 186),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           const Icon(
                             Icons.home_outlined,
-                            color: Color.fromARGB(255, 71, 91, 205),
+                            color: Color.fromARGB(255, 63, 22, 186),
                             // change the size
                             size: 50,
                           ),
@@ -349,16 +350,17 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Container(
+          height: 75,
           decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
+            color: Color.fromARGB(255, 35, 35, 112),
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.grey.withOpacity(0.5),
+            //     spreadRadius: 5,
+            //     blurRadius: 7,
+            //     offset: const Offset(0, 3), // changes position of shadow
+            //   ),
+            // ],
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -373,8 +375,19 @@ class HomeScreen extends StatelessWidget {
             )),
             child: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
-                onTap: (value) => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ScheduleScreen())),
+                currentIndex: 0,
+                unselectedItemColor: Color.fromARGB(255, 165, 167, 186),
+                onTap: (value) {
+                  if (value == 2) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScheduleScreen()));
+                  } else {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }
+                },
                 // ignore: prefer_const_literals_to_create_immutables
                 items: [
                   const BottomNavigationBarItem(
@@ -386,7 +399,7 @@ class HomeScreen extends StatelessWidget {
                     label: 'Messages',
                   ),
                   const BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month_outlined),
+                    icon: Icon(Icons.calendar_month),
                     label: 'Schedule',
                   ),
                   const BottomNavigationBarItem(

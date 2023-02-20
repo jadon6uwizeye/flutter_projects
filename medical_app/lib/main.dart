@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:medical_app/screens/home.dart';
+import 'package:medical_app/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,10 +35,11 @@ class MyApp extends StatelessWidget {
             900: Color.fromRGBO(50, 18, 125, 1),
           },
         ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        '/': (context) => HomeScreen(),
+        '/': (context) => LoginPage(),
+
         // '/folder1': (context) => Folder1Screen(),
         // '/folder2': (context) => Folder2Screen(),
       },

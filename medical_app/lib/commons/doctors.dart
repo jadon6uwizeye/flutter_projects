@@ -39,7 +39,7 @@ class CardComponent extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12.0),
           width: width * 0.4,
-          height: height * 0.3,
+          height: height * 0.25,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -67,7 +67,7 @@ class CardComponent extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: height * 0.01,
+                    height: height * 0.005,
                   ),
                   Text(
                     subtitle,
@@ -79,7 +79,7 @@ class CardComponent extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.01,
               ),
               Container(
                 padding: const EdgeInsets.all(5),
@@ -93,10 +93,10 @@ class CardComponent extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.star,
-                      color: Color.fromARGB(255, 226, 201, 8),
+                      color: Color.fromARGB(255, 203, 148, 10),
                     ),
                     const SizedBox(
-                      width: 5,
+                      width: 5.0,
                     ),
                     Text(
                       rating.toString(),
