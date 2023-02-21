@@ -35,6 +35,7 @@ class ScheduleScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
+                  padding: EdgeInsets.all(2),
                   height: height * 0.08,
                   width: width * 0.30,
                   decoration: BoxDecoration(
@@ -42,41 +43,46 @@ class ScheduleScreen extends StatelessWidget {
                     color: const Color.fromARGB(255, 63, 22, 186),
                   ),
                   // onPressed: () {},
-                  child: const Center(
+                  child: Center(
                       child: Text(
                     'Upcoming',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  )),
-                ),
-                Container(
-                  height: height * 0.08,
-                  width: width * 0.30,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromARGB(255, 225, 224, 227)),
-                  // onPressed: () {},
-                  child: const Center(
-                      child: Text(
-                    'Completed',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 108, 106, 112),
-                      fontSize: 18,
+                      color: Colors.white,
+                      fontSize: width * 0.05,
                     ),
                   )),
                 ),
                 Container(
+                  padding: EdgeInsets.all(2),
                   height: height * 0.08,
                   width: width * 0.30,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color.fromARGB(255, 225, 224, 227)),
                   // onPressed: () {},
-                  child: const Center(
+                  child: Center(
+                      child: Text(
+                    'Completed',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 108, 106, 112),
+                      fontSize: width * 0.05,
+                    ),
+                  )),
+                ),
+                Container(
+                  padding: EdgeInsets.all(2),
+                  height: height * 0.08,
+                  width: width * 0.30,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color.fromARGB(255, 225, 224, 227)),
+                  // onPressed: () {},
+                  child: Center(
                       child: Text(
                     'Cancelled',
                     style: TextStyle(
                         color: Color.fromARGB(255, 108, 106, 112),
-                        fontSize: 18),
+                        fontSize: width * 0.05),
                   )),
                 ),
               ],
@@ -105,6 +111,7 @@ class ScheduleScreen extends StatelessWidget {
                       ),
                     ),
                     _buildVisitCard(
+                      context: context,
                       doctorName: 'Dr. Smith',
                       specialty: 'Cardiology',
                       date: 'Feb 23, 2023',
@@ -127,6 +134,7 @@ class ScheduleScreen extends StatelessWidget {
                       ),
                     ),
                     _buildVisitCard(
+                      context: context,
                       doctorName: 'Dr. Johnson',
                       specialty: 'Dentistry',
                       date: 'Mar 05, 2023',
@@ -149,6 +157,7 @@ class ScheduleScreen extends StatelessWidget {
                       ),
                     ),
                     _buildVisitCard(
+                      context: context,
                       doctorName: 'Dr. Brown',
                       specialty: 'Ophthalmology',
                       date: 'Mar 15, 2023',
@@ -226,12 +235,22 @@ class ScheduleScreen extends StatelessWidget {
   }
 
   Widget _buildVisitCard({
+    required context,
     required String doctorName,
     required String specialty,
     required String date,
     required String time,
     required String status,
   }) {
+    // height as the height of the screen considering safearea
+    final height = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight;
+    // width of the screen considering the safearea
+    final width = MediaQuery.of(context).size.width -
+        MediaQuery.of(context).padding.left -
+        MediaQuery.of(context).padding.right;
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: Card(
@@ -279,44 +298,50 @@ class ScheduleScreen extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(width: 2),
-                  Text(date),
-                  Spacer(),
-                  Icon(Icons.access_time, color: Colors.grey),
-                  SizedBox(width: 2),
-                  Text(time),
-                  Spacer(),
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 18,
-                  ),
-                  SizedBox(
-                    width: 2,
-                  ),
-                  Text(
-                    status,
-                    style: TextStyle(
-                      color: Colors.black,
-                      letterSpacing: 1,
-                      fontSize: 16,
+              padding: const EdgeInsets.all(0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Row(
+                  children: [
+                    SizedBox(width: width * 0.03),
+                    Icon(
+                      Icons.calendar_today,
+                      color: Colors.grey,
                     ),
-                  ),
-                ],
+                    Text(date),
+                    Spacer(),
+                    Icon(Icons.access_time, color: Colors.grey),
+                    Text(time),
+                    Spacer(),
+                    SizedBox(width: width * 0.03),
+
+                    // if condition here
+                  ],
+                ),
               ),
             ),
+            Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 18,
+            ),
+            SizedBox(
+              width: 2,
+            ),
+            Text(
+              status,
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: 1,
+                fontSize: 16,
+              ),
+            ),
+
             ButtonBar(
               children: [
                 Container(
-                  height: 50,
-                  width: 150,
+                  height: height * 0.08,
+                  width: width * 0.35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color.fromARGB(255, 230, 228, 234),
@@ -332,8 +357,9 @@ class ScheduleScreen extends StatelessWidget {
                   )),
                 ),
                 Container(
-                  height: 50,
-                  width: 150,
+                  padding: EdgeInsets.all(2),
+                  height: height * 0.08,
+                  width: width * 0.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color.fromARGB(255, 63, 22, 186),

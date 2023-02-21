@@ -26,7 +26,11 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 244, 244, 248),
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.only(
+              top: 20,
+              left: width * 0.05,
+              right: width * 0.05,
+            ),
             color: Color.fromARGB(255, 244, 244, 248),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -61,44 +65,51 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Card(
                     child: Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.only(
+                        top: height * 0.02,
+                        left: width * 0.02,
+                        right: width * 0.02,
+                        bottom: height * 0.02,
+                      ),
                       width: width * 0.4,
-                      height: height * 0.2,
+                      height: height * 0.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color.fromARGB(255, 63, 22, 186),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.health_and_safety_sharp,
-                            color: Colors.white,
-                            // change the size
-                            size: 50,
-                          ),
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          const Text(
-                            'Clinic Visit',
-                            style: TextStyle(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.health_and_safety_sharp,
                               color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              // change the size
+                              size: 50,
                             ),
-                          ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          const Text(
-                            'Make an appointment',
-                            style: TextStyle(
-                              color: Color.fromRGBO(210, 210, 219, 1),
-                              fontSize: 11,
+                            SizedBox(
+                              height: height * 0.02,
                             ),
-                          ),
-                        ],
+                            const Text(
+                              'Clinic Visit',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            const Text(
+                              'Make an appointment',
+                              style: TextStyle(
+                                color: Color.fromRGBO(210, 210, 219, 1),
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -106,42 +117,44 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(12.0),
                       width: width * 0.4,
-                      height: height * 0.2,
+                      height: height * 0.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 255, 255, 255),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.home_outlined,
-                            color: Color.fromARGB(255, 63, 22, 186),
-                            // change the size
-                            size: 50,
-                          ),
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          const Text(
-                            'Home Visit',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.home_outlined,
+                              color: Color.fromARGB(255, 63, 22, 186),
+                              // change the size
+                              size: 50,
                             ),
-                          ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          const Text(
-                            'Call a doctor home',
-                            style: TextStyle(
-                              color: Color.fromRGBO(210, 210, 219, 1),
-                              fontSize: 11,
+                            SizedBox(
+                              height: height * 0.02,
                             ),
-                          ),
-                        ],
+                            const Text(
+                              'Home Visit',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            const Text(
+                              'Call a doctor home',
+                              style: TextStyle(
+                                color: Color.fromRGBO(210, 210, 219, 1),
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -167,85 +180,85 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(2.0),
                       width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
-                      child: const Text(
+                      child: Text(
                         '🤒  Temperature',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: width * 0.045,
                           color: Colors.black,
                         ),
                       ),
                     ),
                     SizedBox(width: width * 0.02),
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(2.0),
                       width: width * 0.3,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
-                      child: const Text(
+                      child: Text(
                         '🤧  Snuffle',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: width * 0.045,
                           color: Colors.black,
                         ),
                       ),
                     ),
                     SizedBox(width: width * 0.02),
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(2.0),
                       width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
-                      child: const Text(
+                      child: Text(
                         '🤕 headeache',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: width * 0.045,
                           color: Colors.black,
                         ),
                       ),
                     ),
                     SizedBox(width: width * 0.02),
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(2.0),
                       width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
-                      child: const Text(
+                      child: Text(
                         '🤒  Temperature',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: width * 0.045,
                           color: Colors.black,
                         ),
                       ),
                     ),
                     SizedBox(width: width * 0.02),
                     Container(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(2.0),
                       width: width * 0.4,
                       height: height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromARGB(255, 237, 241, 255),
                       ),
-                      child: const Text(
+                      child: Text(
                         '🤮  Vomiting',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: width * 0.045,
                           color: Colors.black,
                         ),
                       ),

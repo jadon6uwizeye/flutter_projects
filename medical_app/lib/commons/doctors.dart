@@ -39,76 +39,78 @@ class CardComponent extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12.0),
           width: width * 0.4,
-          height: height * 0.25,
+          height: height * 0.37,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: image,
-              ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.005,
-                  ),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      color: Color.fromRGBO(210, 210, 219, 1),
-                      fontSize: 11,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: height * 0.01,
-              ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                width: width * 0.2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Color.fromARGB(255, 249, 248, 245),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: height * 0.04,
+                  backgroundImage: image,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(
+                  height: height * 0.02,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 203, 148, 10),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: height * 0.025,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    const SizedBox(
-                      width: 5.0,
+                    SizedBox(
+                      height: height * 0.005,
                     ),
                     Text(
-                      rating.toString(),
+                      subtitle,
                       style: const TextStyle(
-                        color: Color.fromARGB(255, 9, 9, 9),
+                        color: Color.fromRGBO(210, 210, 219, 1),
                         fontSize: 11,
                       ),
                     ),
                   ],
                 ),
-              )
-            ],
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  width: width * 0.2,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Color.fromARGB(255, 249, 248, 245),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color.fromARGB(255, 203, 148, 10),
+                      ),
+                      SizedBox(
+                        width: width * 0.01,
+                      ),
+                      Text(
+                        rating.toString(),
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 9, 9, 9),
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
