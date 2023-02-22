@@ -1,18 +1,52 @@
 // import 'package:awesome/advanced/responsive.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medical_app/helpers/http_request.dart';
 import 'package:medical_app/screens/home.dart';
 import 'package:medical_app/screens/signup.dart';
+import 'package:medical_app/widgets/loader.dart';
+import 'package:medical_app/widgets/toast.dart';
 
 // import 'map/map.dart';
+
+TextEditingController username = TextEditingController();
+TextEditingController password = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+}
+
+login(BuildContext context) async {
+  showLoader(context);
+  try {
+    var auth = await sendHttpRequest(
+        Uri.parse(
+            'https://medicalbackend-production-3b22.up.railway.app/login/'),
+        method: 'post',
+        data: {
+          "username": username.text,
+          "password": password.text,
+        });
+
+    if (auth.statusCode == 200) {
+      Navigator.of(context).pop();
+      showToast(context, "Logged In successfully");
+      Navigator.of(context).pushNamed('/home');
+    } else {
+      Navigator.of(context).pop();
+      showToast(context, "${auth.body}");
+    }
+  } catch (err) {
+    Navigator.of(context).pop();
+    showToast(context, "${err}");
+  }
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -60,10 +94,11 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: username,
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
-                      labelText: "Email",
+                      labelText: "Username",
                       // filled: true,
                       // fillColor: Color.fromARGB(255, 254, 254, 255),
                       labelStyle:
@@ -82,9 +117,10 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
+                  child: TextField(
+                      controller: password,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         labelText: "password",
                         labelStyle:
@@ -92,42 +128,33 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                 ),
                 const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ),
+                  onPressed: () {
+                    login(context);
                     // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const Responsive(),
-                    //   ),
-                    // );
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const HomeScreen()));
                   },
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()));
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 260,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 63, 22, 186),
+                  child: Container(
+                    height: 40,
+                    width: 260,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 255, 255, 255),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: const Center(
-                        child: Text(
-                          "Sign in",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color.fromARGB(255, 63, 22, 186),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Center(
+                      child: Text(
+                        "Sign in",
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),

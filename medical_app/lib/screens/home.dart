@@ -4,11 +4,54 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:medical_app/commons/doctors.dart';
+import 'package:medical_app/helpers/http_request.dart';
 import 'package:medical_app/screens/schedule.dart';
+import 'package:medical_app/widgets/loader.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/toast.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+// initialize _dot
+
+class _HomeScreenState extends State<HomeScreen> {
+  List _doctors = [];
+
+  _fetch_doctors() async {
+    try {
+      var res = await sendHttpRequest(
+        Uri.parse(
+            'https://medicalbackend-production-3b22.up.railway.app/account/doctors'),
+        method: 'get',
+      );
+
+      if (res.statusCode == 200) {
+        return res.body;
+      } else {
+        return null;
+      }
+    } catch (err) {
+      showToast(context, "${err}");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Perform any async operations to set the initial state here.
+    // For example, you could fetch data from an API.
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        _doctors = _fetch_doctors();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -356,7 +399,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ))
             ]),

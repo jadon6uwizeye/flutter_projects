@@ -1,8 +1,13 @@
 // import 'package:awesome/advanced/responsive.dart';
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medical_app/helpers/http_request.dart';
 import 'package:medical_app/screens/home.dart';
 import 'package:medical_app/screens/login.dart';
+import 'package:medical_app/widgets/loader.dart';
+import 'package:medical_app/widgets/toast.dart';
 
 // import 'map/map.dart';
 
@@ -11,6 +16,55 @@ class SignUpPage extends StatefulWidget {
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
+}
+
+TextEditingController FullNames = TextEditingController();
+TextEditingController Email = TextEditingController();
+TextEditingController Password = TextEditingController();
+TextEditingController Password2 = TextEditingController();
+TextEditingController Username = TextEditingController();
+TextEditingController PhoneNumber = TextEditingController();
+TextEditingController Specialist = TextEditingController();
+TextEditingController About = TextEditingController();
+TextEditingController MerchantName = TextEditingController();
+
+signup(BuildContext context) async {
+  showLoader(context);
+  try {
+    if (Password.text != Password2.text) {
+      Navigator.of(context).pop();
+      showToast(context, "Passwords do not match");
+      return;
+    }
+    var auth = await sendHttpRequest(
+        Uri.parse(
+            'https://medicalbackend-production-3b22.up.railway.app/account/'),
+        method: 'post',
+        data: {
+          "email": Email.text,
+          "full_name": FullNames.text,
+          "phone_number": PhoneNumber.text,
+          "password": Password.text,
+          "username": Username.text,
+          "user_type": "VISITER",
+          "specialist": "None",
+          "about": "Normal user",
+          "merchant_name": "None"
+        });
+    if (auth.statusCode == 201) {
+      Navigator.of(context).pop();
+      showToast(context, "Account created successfully Now login");
+      Navigator.of(context).pushNamed('/');
+    } else {
+      Navigator.of(context).pop();
+      print(auth.body);
+      showToast(context, "${auth.body}");
+    }
+  } catch (err) {
+    Navigator.of(context).pop();
+    print(err);
+    showToast(context, "$err");
+  }
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -51,8 +105,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: FullNames,
+                    decoration: const InputDecoration(
                       border: InputBorder.none,
                       labelText: "Full names",
                       // filled: true,
@@ -63,27 +118,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                  ),
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Address",
-                      // filled: true,
-                      // fillColor: Color.fromARGB(255, 254, 254, 255),
-                      labelStyle:
-                          TextStyle(fontSize: 12, fontFamily: 'Sans Serif'),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -95,7 +129,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
+                  child: TextField(
+                    controller: Email,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: "Email",
@@ -117,7 +152,54 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
+                  child: TextField(
+                    controller: PhoneNumber,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      labelText: "Phone number",
+                      // filled: true,
+                      // fillColor: Color.fromARGB(255, 254, 254, 255),
+                      labelStyle:
+                          TextStyle(fontSize: 12, fontFamily: 'Sans Serif'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    controller: Username,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      labelText: "username",
+                      // filled: true,
+                      // fillColor: Color.fromARGB(255, 254, 254, 255),
+                      labelStyle:
+                          TextStyle(fontSize: 12, fontFamily: 'Sans Serif'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                      controller: Password,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -137,7 +219,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: const TextField(
+                  child: TextField(
+                      controller: Password2,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -162,10 +245,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       elevation: 0,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()));
+                      signup(context);
+                      // Navigator.push(
+                      // context,
+                      // MaterialPageRoute(
+                      //     builder: (context) => const LoginPage())
+                      // );
                     },
                     child: Container(
                       height: 40,

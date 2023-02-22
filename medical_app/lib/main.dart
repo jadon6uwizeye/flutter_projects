@@ -39,9 +39,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => LoginPage(),
-
-        // '/folder1': (context) => Folder1Screen(),
-        // '/folder2': (context) => Folder2Screen(),
+        '/home': (context) => HomeScreen(),
       },
     );
   }
