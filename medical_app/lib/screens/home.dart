@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
       if (res.statusCode == 200) {
-        return res.body;
+        return json.decode(res.body);
       } else {
         return null;
       }
@@ -51,6 +52,58 @@ class _HomeScreenState extends State<HomeScreen> {
         _doctors = _fetch_doctors();
       });
     });
+  }
+
+  doctors() {
+    _fetch_doctors().then((value) {
+      setState(() {
+        _doctors = value;
+      });
+    });
+    List<Widget> rows = [];
+    for (int i = 0; i < _doctors.length; i += 2) {
+      var doctor1 = _doctors[i];
+      var doctor2 = i + 1 < _doctors.length ? _doctors[i + 1] : null;
+
+      List<Widget> columns = [
+        Expanded(
+          child: CardComponent(
+            id: doctor1['id'],
+            title: doctor1['full_name'],
+            subtitle: doctor1['specialist'],
+            image: AssetImage('assets/images/avatar.png'),
+            rating: 1,
+          ),
+        ),
+      ];
+
+      if (doctor2 != null) {
+        columns.add(
+          SizedBox(width: 16),
+        );
+        columns.add(
+          Expanded(
+            child: CardComponent(
+              id: doctor2['id'],
+              title: doctor2['full_name'],
+              subtitle: doctor2['specialist'],
+              image: AssetImage('assets/images/avatar.png'),
+              rating: 1,
+            ),
+          ),
+        );
+      }
+
+      rows.add(
+        Row(
+          children: columns,
+        ),
+      );
+    }
+
+    return Column(
+      children: rows,
+    );
   }
 
   @override
@@ -322,86 +375,17 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: height * 0.02,
               ),
-              SingleChildScrollView(
-                  // a column with two columns in a row with cards
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            // two cards with image avatar name, specialty and star rating
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                CardComponent(
-                                    title: "Dr. Chriss frazzier",
-                                    subtitle: "Therapist",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                                SizedBox(
-                                  width: width * 0.05,
-                                ),
-                                CardComponent(
-                                    title: "Dr. Chriss John",
-                                    subtitle: "pediatrician",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height * 0.01,
-                            ),
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                CardComponent(
-                                    title: "Dr. john Doe",
-                                    subtitle: "Gyncologist",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                                SizedBox(
-                                  width: width * 0.05,
-                                ),
-                                CardComponent(
-                                    title: "John Stones",
-                                    subtitle: "doctor",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                              ],
-                            ),
-                            Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                CardComponent(
-                                    title: "Dr. Chriss frazzier",
-                                    subtitle: "Specialist",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                                SizedBox(
-                                  width: width * 0.05,
-                                ),
-                                CardComponent(
-                                    title: "Dr. Chriss frazzier",
-                                    subtitle: "Pediatrician",
-                                    image:
-                                        AssetImage('assets/images/avatar.png'),
-                                    rating: 5),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ))
+              SizedBox(
+                // height: height * 0.3,
+                // width: width * 0.9,
+                child: SingleChildScrollView(
+                    // a column with two columns in a row with cards
+                    // scrollDirection: Axis.horizontal,
+                    child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [doctors()],
+                )),
+              )
             ]),
           ),
         ),

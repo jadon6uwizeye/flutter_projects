@@ -9,8 +9,11 @@ class CardComponent extends StatelessWidget {
   final AssetImage image;
   final int rating;
 
+  final id;
+
   const CardComponent({
     Key? key,
+    required this.id,
     required this.title,
     required this.subtitle,
     required this.image,
@@ -31,7 +34,7 @@ class CardComponent extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DoctorDetailsScreen(),
+            builder: (context) => DoctorDetailsScreen(id:id),
           ),
         );
       },
